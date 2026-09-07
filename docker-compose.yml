@@ -1,0 +1,58 @@
+services:
+  postgres:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_DB: integratex
+      POSTGRES_USER: integratex
+      POSTGRES_PASSWORD: integratex
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U integratex"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+    volumes:
+      - integratex-postgres:/var/lib/postgresql/data
+
+  redis:
+    image: redis:7-alpine
+    command: redis-server --appendonly yes
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+
+  backend:
+    build: ./backend
+    environment:
+      DATABASE_URL: postgresql+psycopg://integratex:integratex@postgres:5432/integratex
+      REDIS_URL: redis://redis:6379/0
+    ports:
+      - "8000:8000"
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+
+  worker:
+    build: ./backend
+    command: celery -A app.celery_app.celery_app worker --loglevel=INFO --concurrency=2
+    environment:
+      DATABASE_URL: postgresql+psycopg://integratex:integratex@postgres:5432/integratex
+      REDIS_URL: redis://redis:6379/0
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+
+  frontend:
+    build: ./frontend
+    ports:
+      - "5173:80"
+    depends_on:
+      - backend
+
+volumes:
+  integratex-postgres:
