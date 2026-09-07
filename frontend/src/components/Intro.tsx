@@ -31,15 +31,15 @@ export function Intro({ onEnter }: IntroProps) {
       </div>
 
       <div className="intro-copy">
-        <motion.p initial={{ opacity: 0, y: 18 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 }}>AI-NATIVE WORKFLOW RELIABILITY PLATFORM</motion.p>
+        <motion.p initial={{ opacity: 0, y: 18 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 }}>THE API CHAOS CONTROL ARCADE</motion.p>
         <motion.h1 initial={{ opacity: 0, y: 50 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.3, duration: 0.9, ease: [0.16, 1, 0.3, 1] }}>
           INTEGRATE<span>X</span>
         </motion.h1>
         <motion.div className="intro-statement" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.9 }}>
-          <span>INTENT</span><i /> <span>EVIDENCE</span><i /> <span>EXECUTION</span><i /> <span>RECOVERY</span>
+          <span>BUILD</span><i /> <span>BREAK</span><i /> <span>TRACE</span><i /> <span>RECOVER</span>
         </motion.div>
         <motion.button className="enter-button" onClick={onEnter} initial={{ opacity: 0, y: 25 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 1.15 }}>
-          <span>ENTER THE SYSTEM</span>
+          <span>ENTER THE ARCADE</span>
           <ArrowUpRight size={20} />
           <b><AudioLines size={13} /> LIVE DEMO</b>
         </motion.button>

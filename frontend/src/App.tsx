@@ -1,5 +1,5 @@
 import { lazy, Suspense, useEffect, useState } from 'react'
-import { Bell, ChevronDown, CircleHelp, Menu, Search, Wifi, X } from 'lucide-react'
+import { Bell, ChevronDown, CircleHelp, Menu, Palette, Wifi, X } from 'lucide-react'
 import { AnimatePresence, motion } from 'framer-motion'
 import type { NavId } from './types'
 import { AmbientScene } from './components/AmbientScene'
@@ -24,15 +24,39 @@ const pageNames: Record<NavId, string> = {
   approvals: 'Guard rail',
 }
 
+const themes = [
+  { id: 'arcade', label: 'Neon arcade' },
+  { id: 'solar', label: 'Solar riot' },
+  { id: 'glacier', label: 'Glacier pulse' },
+] as const
+
+type ThemeId = (typeof themes)[number]['id']
+
 function App() {
   const [entered, setEntered] = useState(false)
   const [active, setActive] = useState<NavId>('overview')
   const [mobileOpen, setMobileOpen] = useState(false)
   const [apiOnline, setApiOnline] = useState(false)
+  const [theme, setTheme] = useState<ThemeId>(() => {
+    const saved = window.localStorage.getItem('integratex-theme')
+    return themes.some((item) => item.id === saved) ? saved as ThemeId : 'arcade'
+  })
 
   useEffect(() => {
     fetch('/health').then((response) => setApiOnline(response.ok)).catch(() => setApiOnline(false))
   }, [])
+
+  useEffect(() => {
+    document.documentElement.dataset.theme = theme
+    window.localStorage.setItem('integratex-theme', theme)
+  }, [theme])
+
+  const cycleTheme = () => {
+    const index = themes.findIndex((item) => item.id === theme)
+    setTheme(themes[(index + 1) % themes.length].id)
+  }
+
+  const themeLabel = themes.find((item) => item.id === theme)?.label ?? 'Neon arcade'
 
   const navigate = (id: NavId) => {
     setActive(id)
@@ -52,7 +76,7 @@ function App() {
               <button className="menu-button" onClick={() => setMobileOpen((value) => !value)}>{mobileOpen ? <X size={18} /> : <Menu size={18} />}</button>
               <div className="breadcrumb"><span>INTEGRATEX</span><i>/</i><strong>{pageNames[active].toUpperCase()}</strong></div>
               <div className="topbar-actions">
-                <button className="search-button"><Search size={14} /><span>Search anything</span><kbd>⌘ K</kbd></button>
+                <button className="theme-button" onClick={cycleTheme} aria-label={`Change theme. Current theme: ${themeLabel}`} title="Cycle visual theme"><Palette size={15} /><span>{themeLabel}</span><i /></button>
                 <span className={`api-state ${apiOnline ? 'online' : ''}`}><Wifi size={13} /> {apiOnline ? 'API LIVE' : 'DEMO MODE'}</span>
                 <button className="icon-button"><CircleHelp size={16} /></button>
                 <button className="icon-button notification"><Bell size={16} /><i /></button>

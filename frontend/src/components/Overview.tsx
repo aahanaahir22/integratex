@@ -8,6 +8,8 @@ interface OverviewProps {
 }
 
 export function Overview({ navigate }: OverviewProps) {
+  const ribbonSignals = ['INTENT → DAG', 'RAG WITH RECEIPTS', '429 RECOVERY', 'HUMAN APPROVAL', 'ZERO-KEY DEMO', 'TRACE EVERYTHING']
+
   return (
     <motion.div className="page overview" initial={{ opacity: 0, y: 14 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -10 }}>
       <section className="hero-panel">
@@ -24,6 +26,7 @@ export function Overview({ navigate }: OverviewProps) {
             <span><CheckCircle2 size={13} /> Grounded RAG</span>
             <span><CheckCircle2 size={13} /> Guarded actions</span>
           </div>
+          <div className="hero-stamp"><span>SAFE</span><strong>CHAOS<br />MODE</strong><small>NO REAL SIDE EFFECTS</small></div>
         </div>
 
         <div className="mesh-visual" aria-label="Animated connector mesh">
@@ -38,6 +41,12 @@ export function Overview({ navigate }: OverviewProps) {
           <motion.span className="mesh-node node-github" animate={{ x: [0, -7, 0] }} transition={{ duration: 4.4, repeat: Infinity }}>GH</motion.span>
           <div className="packet packet-a" /><div className="packet packet-b" /><div className="packet packet-c" />
           <div className="mesh-caption"><span><i /> 6 CONNECTORS</span><span><i /> 18 CONTRACTS</span><span><i /> 4 WORKERS</span></div>
+        </div>
+      </section>
+
+      <section className="kinetic-ribbon" aria-label="IntegrateX capabilities">
+        <div className="ribbon-track" aria-hidden="true">
+          {[...ribbonSignals, ...ribbonSignals].map((signal, index) => <span key={`${signal}-${index}`}>{signal}<i>✦</i></span>)}
         </div>
       </section>
 
