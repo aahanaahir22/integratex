@@ -19,7 +19,9 @@ jobs:
           cache: pip
           cache-dependency-path: backend/requirements.txt
       - run: pip install -r requirements.txt
-      - run: pytest -q
+      # Invoking pytest as a module keeps the backend working directory on
+      # sys.path consistently across local environments and GitHub runners.
+      - run: python -m pytest -q
 
   frontend:
     runs-on: ubuntu-latest
