@@ -10,7 +10,6 @@
     "typecheck": "tsc -b --pretty false"
   },
   "dependencies": {
-    "@xyflow/react": "^12.9.3",
     "framer-motion": "^12.23.12",
     "lucide-react": "^0.542.0",
     "react": "^19.1.1",

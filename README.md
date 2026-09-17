@@ -1,6 +1,6 @@
 # IntegrateX
 
-### The spatial workflow loom for evidence-backed API automation
+### An animated data factory for evidence-backed API automation
 
 [![Live Demo](https://img.shields.io/badge/LIVE_DEMO-ENTER_INTEGRATEX-9d7bff?style=for-the-badge)](https://aahanaahir22.github.io/integratex/)
 [![IntegrateX CI](https://github.com/aahanaahir22/integratex/actions/workflows/ci.yml/badge.svg)](https://github.com/aahanaahir22/integratex/actions/workflows/ci.yml)
@@ -10,7 +10,7 @@
 **[Launch the live interactive demo →](https://aahanaahir22.github.io/integratex/)**  
 No account, API key or backend is required for the hosted product tour. The complete FastAPI execution platform runs locally through Docker.
 
-IntegrateX converts natural-language business requirements into typed, versioned and recoverable API workflows. Its bright editorial **Workflow Loom** makes the invisible parts of automation tangible: evidence threads, deterministic gates, human decisions, recovery paths and final receipts. Under the interface, it retrieves version-bound connector documentation, validates schemas and risk policies, and executes through a durable worker architecture with approval gates, retries, idempotency and complete traces.
+IntegrateX converts natural-language business requirements into typed, versioned and recoverable API workflows. Its cinematic **Data Factory** turns invisible architecture into a physical journey: raw intent enters a machine, documentation is scanned, typed operations become routed parcels, risky actions stop at a mechanical human gate, failures are injected on a controlled floor, and verified events leave as a printed receipt. Under the experience, it retrieves version-bound connector documentation, validates schemas and risk policies, and executes through a durable worker architecture with approval gates, retries, idempotency and complete traces.
 
 > **Engineering rule:** AI proposes. Deterministic code validates and executes.
 
@@ -40,22 +40,21 @@ Trigger → Validate → Transform → Guard → Execute → Verify → Record
 
 ## Product surfaces
 
-- **The Loom** — draggable spatial model of intent, evidence, gates, execution and receipts
-- **Compose** — natural-language intent to an evidence-backed, interactive workflow DAG
-- **Receipts** — versioned documentation, hashes, grounding reasons and model boundaries
-- **Decision** — human approval document with the exact proposed record diff
-- **Chaos** — controlled 429, timeout, schema-drift and duplicate-webhook injection
-- **Passport** — tactile connector dossiers with scopes, versions and contract health
-- **Outcomes** — poster-style reliability, recovery, latency and contract-quality signals
+- **Intake Machine** — natural-language business intent is compiled into a typed route
+- **Evidence Scanner** — versioned documentation, hashes and grounding reasons are inspected
+- **Routing Yard** — workflow operations and connector contracts become physical cargo
+- **Human Guard** — risky mutations stop at a mechanical gate with an exact record diff
+- **Chaos Floor** — controlled 429, timeout, schema-drift and duplicate-webhook injection
+- **Receipt Printer** — execution events and seeded outcome signals leave as a traceable receipt
 
 ## What is implemented
 
 ### Frontend
 
 - React 19 + TypeScript + Vite
-- Framer Motion scene transitions, draggable workflow knots and micro-interactions
-- Interactive XYFlow workflow graph
-- Responsive editorial layout, horizontal scene navigation and reduced-motion mode
+- Framer Motion factory machinery, route transitions and micro-interactions
+- Scroll-driven guided product narrative with working compilation and decision controls
+- Responsive industrial art direction, station navigation and reduced-motion mode
 - Animated compiler, execution trace and failure-recovery sequences
 - Safe local fallback data so the experience remains demonstrable if the API is offline
 
