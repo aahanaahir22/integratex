@@ -20,7 +20,7 @@ export function Analytics() {
   return (
     <motion.div className="page analytics-page" initial={{ opacity: 0, y: 14 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -10 }}>
       <div className="page-heading">
-        <div><span className="section-kicker"><Radar size={14} /> RELIABILITY SIGNALS / 7-DAY WINDOW</span><h2>Measure outcomes.<br /><em>Not AI theatre.</em></h2></div>
+        <div><span className="section-kicker"><Radar size={14} /> SEEDED DEMO SIGNALS / 7-DAY WINDOW</span><h2>Measure outcomes.<br /><em>Not AI theatre.</em></h2></div>
         <div className="range-picker"><button>24H</button><button className="active">7D</button><button>30D</button><button>90D</button></div>
       </div>
 
@@ -36,7 +36,7 @@ export function Analytics() {
 
       <section className="analytics-grid">
         <article className="throughput-chart panel">
-          <header><span><Activity size={15} /> EXECUTION THROUGHPUT</span><em>1,284 RUNS</em></header>
+          <header><span><Activity size={15} /> EXECUTION THROUGHPUT</span><em>1,284 SEEDED RUNS</em></header>
           <div className="chart-y"><span>200</span><span>150</span><span>100</span><span>50</span><span>0</span></div>
           <div className="area-chart">
             <svg viewBox="0 0 700 220" preserveAspectRatio="none">

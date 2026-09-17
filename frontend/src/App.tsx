@@ -1,10 +1,9 @@
 import { lazy, Suspense, useEffect, useState } from 'react'
-import { Bell, ChevronDown, CircleHelp, Menu, Palette, Wifi, X } from 'lucide-react'
+import { ArrowUpRight, CircleDot, Github, Sparkles } from 'lucide-react'
 import { AnimatePresence, motion } from 'framer-motion'
 import type { NavId } from './types'
 import { AmbientScene } from './components/AmbientScene'
 import { Intro } from './components/Intro'
-import { Sidebar } from './components/Sidebar'
 
 const Overview = lazy(() => import('./components/Overview').then((module) => ({ default: module.Overview })))
 const Studio = lazy(() => import('./components/Studio').then((module) => ({ default: module.Studio })))
@@ -14,89 +13,78 @@ const EvidenceVault = lazy(() => import('./components/EvidenceVault').then((modu
 const Analytics = lazy(() => import('./components/Analytics').then((module) => ({ default: module.Analytics })))
 const Approvals = lazy(() => import('./components/Approvals').then((module) => ({ default: module.Approvals })))
 
-const pageNames: Record<NavId, string> = {
-  overview: 'Mission control',
-  studio: 'Compiler studio',
-  failure: 'Failure lab',
-  connectors: 'Connector mesh',
-  evidence: 'Evidence vault',
-  analytics: 'Reliability signals',
-  approvals: 'Guard rail',
-}
-
-const themes = [
-  { id: 'arcade', label: 'Neon arcade' },
-  { id: 'solar', label: 'Solar riot' },
-  { id: 'glacier', label: 'Glacier pulse' },
-] as const
-
-type ThemeId = (typeof themes)[number]['id']
+const scenes: Array<{ id: NavId; number: string; label: string; verb: string }> = [
+  { id: 'overview', number: '00', label: 'The Loom', verb: 'Understand' },
+  { id: 'studio', number: '01', label: 'Compose', verb: 'Build' },
+  { id: 'evidence', number: '02', label: 'Receipts', verb: 'Ground' },
+  { id: 'approvals', number: '03', label: 'Decision', verb: 'Guard' },
+  { id: 'failure', number: '04', label: 'Chaos', verb: 'Recover' },
+  { id: 'connectors', number: '05', label: 'Passport', verb: 'Connect' },
+  { id: 'analytics', number: '06', label: 'Outcomes', verb: 'Measure' },
+]
 
 function App() {
   const [entered, setEntered] = useState(false)
   const [active, setActive] = useState<NavId>('overview')
-  const [mobileOpen, setMobileOpen] = useState(false)
   const [apiOnline, setApiOnline] = useState(false)
-  const [theme, setTheme] = useState<ThemeId>(() => {
-    const saved = window.localStorage.getItem('integratex-theme')
-    return themes.some((item) => item.id === saved) ? saved as ThemeId : 'arcade'
-  })
 
   useEffect(() => {
+    document.documentElement.dataset.theme = 'loom'
     fetch('/health').then((response) => setApiOnline(response.ok)).catch(() => setApiOnline(false))
   }, [])
 
-  useEffect(() => {
-    document.documentElement.dataset.theme = theme
-    window.localStorage.setItem('integratex-theme', theme)
-  }, [theme])
-
-  const cycleTheme = () => {
-    const index = themes.findIndex((item) => item.id === theme)
-    setTheme(themes[(index + 1) % themes.length].id)
-  }
-
-  const themeLabel = themes.find((item) => item.id === theme)?.label ?? 'Neon arcade'
-
-  const navigate = (id: NavId) => {
-    setActive(id)
-    setMobileOpen(false)
-  }
+  const activeIndex = scenes.findIndex((scene) => scene.id === active)
+  const activeScene = scenes[activeIndex]
 
   return (
-    <div className="app-shell">
+    <div className="loom-shell">
       <AmbientScene />
       <AnimatePresence>{!entered && <Intro onEnter={() => setEntered(true)} />}</AnimatePresence>
       {entered && (
-        <motion.div className="console-shell" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.25, duration: 0.7 }}>
-          <div className={mobileOpen ? 'sidebar-wrap open' : 'sidebar-wrap'}><Sidebar active={active} onChange={navigate} /></div>
-          {mobileOpen && <button className="mobile-scrim" onClick={() => setMobileOpen(false)} aria-label="Close menu" />}
-          <div className="console-main">
-            <header className="topbar">
-              <button className="menu-button" onClick={() => setMobileOpen((value) => !value)}>{mobileOpen ? <X size={18} /> : <Menu size={18} />}</button>
-              <div className="breadcrumb"><span>INTEGRATEX</span><i>/</i><strong>{pageNames[active].toUpperCase()}</strong></div>
-              <div className="topbar-actions">
-                <button className="theme-button" onClick={cycleTheme} aria-label={`Change theme. Current theme: ${themeLabel}`} title="Cycle visual theme"><Palette size={15} /><span>{themeLabel}</span><i /></button>
-                <span className={`api-state ${apiOnline ? 'online' : ''}`}><Wifi size={13} /> {apiOnline ? 'API LIVE' : 'DEMO MODE'}</span>
-                <button className="icon-button"><CircleHelp size={16} /></button>
-                <button className="icon-button notification"><Bell size={16} /><i /></button>
-                <button className="user-button"><span>AA</span><ChevronDown size={13} /></button>
-              </div>
-            </header>
-            <main>
-              <Suspense fallback={<div className="page-loading"><span /><strong>LOADING CONTROL SURFACE</strong></div>}>
-                <AnimatePresence mode="wait">
-                  {active === 'overview' && <Overview key="overview" navigate={navigate} />}
-                  {active === 'studio' && <Studio key="studio" />}
-                  {active === 'failure' && <FailureLab key="failure" />}
-                  {active === 'connectors' && <Connectors key="connectors" />}
-                  {active === 'evidence' && <EvidenceVault key="evidence" />}
-                  {active === 'analytics' && <Analytics key="analytics" />}
-                  {active === 'approvals' && <Approvals key="approvals" />}
-                </AnimatePresence>
-              </Suspense>
-            </main>
-          </div>
+        <motion.div className="loom-experience" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.16, duration: 0.55 }}>
+          <header className="loom-header">
+            <button className="loom-brand" onClick={() => setActive('overview')} aria-label="Open IntegrateX overview">
+              <span>IX</span>
+              <strong>INTEGRATEX<small>WORKFLOW INTELLIGENCE</small></strong>
+            </button>
+
+            <nav className="scene-nav" aria-label="Product areas">
+              {scenes.map((scene) => (
+                <button key={scene.id} className={active === scene.id ? 'active' : ''} onClick={() => setActive(scene.id)}>
+                  <small>{scene.number}</small>
+                  <span>{scene.label}</span>
+                  {active === scene.id && <motion.i layoutId="scene-active" />}
+                </button>
+              ))}
+            </nav>
+
+            <div className="loom-header-actions">
+              <span className={apiOnline ? 'runtime-state live' : 'runtime-state'}><CircleDot size={12} /> {apiOnline ? 'API LIVE' : 'SAFE SIMULATION'}</span>
+              <a href="https://github.com/aahanaahir22/integratex" target="_blank" rel="noreferrer"><Github size={15} /><span>SOURCE</span><ArrowUpRight size={13} /></a>
+            </div>
+          </header>
+
+          <div className="scene-progress" aria-hidden="true"><motion.span animate={{ width: `${((activeIndex + 1) / scenes.length) * 100}%` }} /></div>
+
+          <main className="loom-main">
+            <Suspense fallback={<div className="page-loading"><Sparkles size={18} /><strong>THREADING THE NEXT SCENE</strong></div>}>
+              <AnimatePresence mode="wait">
+                {active === 'overview' && <Overview key="overview" navigate={setActive} />}
+                {active === 'studio' && <Studio key="studio" />}
+                {active === 'failure' && <FailureLab key="failure" />}
+                {active === 'connectors' && <Connectors key="connectors" />}
+                {active === 'evidence' && <EvidenceVault key="evidence" />}
+                {active === 'analytics' && <Analytics key="analytics" />}
+                {active === 'approvals' && <Approvals key="approvals" />}
+              </AnimatePresence>
+            </Suspense>
+          </main>
+
+          <footer className="scene-footer">
+            <span>{activeScene.number} / {activeScene.verb.toUpperCase()}</span>
+            <strong>AI PROPOSES <i /> DETERMINISTIC CODE DECIDES</strong>
+            <span>SAFE SIDE-EFFECT SIMULATION</span>
+          </footer>
         </motion.div>
       )}
     </div>

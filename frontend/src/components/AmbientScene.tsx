@@ -1,17 +1,31 @@
 import { motion } from 'framer-motion'
 
+const threads = [
+  'M-80 160 C190 20 330 310 610 130 S1030 40 1380 210',
+  'M-60 520 C220 690 390 330 650 520 S1040 760 1460 470',
+  'M120 -80 C40 230 350 270 190 560 S280 900 480 1040',
+  'M1120 -120 C890 160 1210 320 980 560 S870 870 1230 1060',
+]
+
 export function AmbientScene() {
   return (
-    <div className="ambient-scene" aria-hidden="true">
-      <div className="noise" />
-      <div className="grid-plane" />
-      <div className="reactor-beam beam-one" />
-      <div className="reactor-beam beam-two" />
-      <motion.div className="aurora aurora-one" animate={{ x: [0, 70, -20, 0], y: [0, -40, 20, 0], scale: [1, 1.18, 0.96, 1] }} transition={{ duration: 18, repeat: Infinity, ease: 'easeInOut' }} />
-      <motion.div className="aurora aurora-two" animate={{ x: [0, -80, 30, 0], y: [0, 50, -10, 0], scale: [1, 0.9, 1.15, 1] }} transition={{ duration: 22, repeat: Infinity, ease: 'easeInOut' }} />
-      <motion.span className="ambient-chip chip-one" animate={{ y: [0, -18, 0], rotate: [-4, 3, -4] }} transition={{ duration: 5, repeat: Infinity }}>SIGNAL // 01</motion.span>
-      <motion.span className="ambient-chip chip-two" animate={{ y: [0, 15, 0], rotate: [5, -2, 5] }} transition={{ duration: 6.5, repeat: Infinity }}>RECOVER // 99</motion.span>
-      <div className="scanline" />
+    <div className="ambient-scene loom-ambient" aria-hidden="true">
+      <div className="paper-grain" />
+      <svg className="thread-field" viewBox="0 0 1400 900" preserveAspectRatio="none">
+        {threads.map((path, index) => (
+          <motion.path
+            key={path}
+            d={path}
+            initial={{ pathLength: 0, opacity: 0 }}
+            animate={{ pathLength: 1, opacity: [0.16, 0.34, 0.16] }}
+            transition={{ pathLength: { duration: 2.2, delay: index * 0.18 }, opacity: { duration: 7 + index, repeat: Infinity } }}
+          />
+        ))}
+      </svg>
+      <motion.div className="floating-index index-a" animate={{ y: [0, -22, 0], rotate: [-2, 4, -2] }} transition={{ duration: 7, repeat: Infinity }}>API / 06</motion.div>
+      <motion.div className="floating-index index-b" animate={{ y: [0, 18, 0], rotate: [4, -3, 4] }} transition={{ duration: 8.5, repeat: Infinity }}>TRACE / LIVE</motion.div>
+      <div className="loom-corner corner-one" />
+      <div className="loom-corner corner-two" />
     </div>
   )
 }

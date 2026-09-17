@@ -1,6 +1,6 @@
 # IntegrateX
 
-### Evidence-backed API integration and workflow reliability platform
+### The spatial workflow loom for evidence-backed API automation
 
 [![Live Demo](https://img.shields.io/badge/LIVE_DEMO-ENTER_INTEGRATEX-9d7bff?style=for-the-badge)](https://aahanaahir22.github.io/integratex/)
 [![IntegrateX CI](https://github.com/aahanaahir22/integratex/actions/workflows/ci.yml/badge.svg)](https://github.com/aahanaahir22/integratex/actions/workflows/ci.yml)
@@ -10,7 +10,7 @@
 **[Launch the live interactive demo →](https://aahanaahir22.github.io/integratex/)**  
 No account, API key or backend is required for the hosted product tour. The complete FastAPI execution platform runs locally through Docker.
 
-IntegrateX converts natural-language business requirements into typed, versioned and recoverable API workflows. It retrieves version-bound connector documentation, attaches evidence to generated operations, validates schemas and risk policies, and executes through a durable worker architecture with approval gates, retries, idempotency and complete traces.
+IntegrateX converts natural-language business requirements into typed, versioned and recoverable API workflows. Its bright editorial **Workflow Loom** makes the invisible parts of automation tangible: evidence threads, deterministic gates, human decisions, recovery paths and final receipts. Under the interface, it retrieves version-bound connector documentation, validates schemas and risk policies, and executes through a durable worker architecture with approval gates, retries, idempotency and complete traces.
 
 > **Engineering rule:** AI proposes. Deterministic code validates and executes.
 
@@ -40,22 +40,22 @@ Trigger → Validate → Transform → Guard → Execute → Verify → Record
 
 ## Product surfaces
 
-- **Mission Control** — animated operational overview and live execution trace
-- **Compiler Studio** — natural-language intent to evidence-backed workflow DAG
-- **Failure Lab** — controlled 429, timeout, schema-drift and duplicate-webhook injection
-- **Connector Mesh** — versioned connector passports, scopes and contract health
-- **Evidence Vault** — documentation chunks, versions, hashes and grounding reasons
-- **Reliability Signals** — outcomes, recovery, latency and contract-quality views
-- **Guard Rail** — human approval queue with a proposed record diff and audit decision
+- **The Loom** — draggable spatial model of intent, evidence, gates, execution and receipts
+- **Compose** — natural-language intent to an evidence-backed, interactive workflow DAG
+- **Receipts** — versioned documentation, hashes, grounding reasons and model boundaries
+- **Decision** — human approval document with the exact proposed record diff
+- **Chaos** — controlled 429, timeout, schema-drift and duplicate-webhook injection
+- **Passport** — tactile connector dossiers with scopes, versions and contract health
+- **Outcomes** — poster-style reliability, recovery, latency and contract-quality signals
 
 ## What is implemented
 
 ### Frontend
 
 - React 19 + TypeScript + Vite
-- Framer Motion page, state and micro-interactions
+- Framer Motion scene transitions, draggable workflow knots and micro-interactions
 - Interactive XYFlow workflow graph
-- Responsive layout and reduced-motion mode
+- Responsive editorial layout, horizontal scene navigation and reduced-motion mode
 - Animated compiler, execution trace and failure-recovery sequences
 - Safe local fallback data so the experience remains demonstrable if the API is offline
 

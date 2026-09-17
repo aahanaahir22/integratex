@@ -47,10 +47,10 @@ export function WorkflowMap({ workflow }: { workflow: CompiledWorkflow }) {
         fitViewOptions={{ padding: 0.2 }}
         minZoom={0.45}
         maxZoom={1.4}
-        defaultEdgeOptions={{ style: { stroke: '#8c73f5', strokeWidth: 1.6 } }}
+        defaultEdgeOptions={{ style: { stroke: '#2f45ff', strokeWidth: 2 } }}
         proOptions={{ hideAttribution: true }}
       >
-        <Background color="#433b66" gap={30} size={1} />
+        <Background color="#9e9a8e" gap={30} size={1} />
         <Controls showInteractive={false} />
       </ReactFlow>
     </div>

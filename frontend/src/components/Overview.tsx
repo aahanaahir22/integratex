@@ -1,4 +1,4 @@
-import { ArrowRight, BookOpenCheck, Braces, CheckCircle2, CircleDot, Clock3, GitBranch, RadioTower, RotateCcw, ShieldCheck, Sparkles, Zap } from 'lucide-react'
+import { ArrowDownRight, ArrowRight, Asterisk, Braces, Check, CircleDot, FileSearch, Fingerprint, RotateCcw, ShieldCheck, Sparkles, Split, Zap } from 'lucide-react'
 import { motion } from 'framer-motion'
 import { traceEvents } from '../data'
 import type { NavId } from '../types'
@@ -7,78 +7,94 @@ interface OverviewProps {
   navigate: (id: NavId) => void
 }
 
+const loomSteps = [
+  { label: 'Intent', detail: 'Describe the business outcome', icon: Sparkles, className: 'loom-node-intent' },
+  { label: 'Evidence', detail: 'Retrieve versioned API truth', icon: FileSearch, className: 'loom-node-evidence' },
+  { label: 'Validate', detail: 'Check types, scopes and contracts', icon: Braces, className: 'loom-node-validate' },
+  { label: 'Approval', detail: 'Pause irreversible decisions', icon: ShieldCheck, className: 'loom-node-approval' },
+  { label: 'Execute', detail: 'Run with bounded retries', icon: Zap, className: 'loom-node-execute' },
+  { label: 'Verified', detail: 'Record the business receipt', icon: Fingerprint, className: 'loom-node-verified' },
+]
+
+const principles = [
+  ['01', 'Ground before generation', 'Every suggested API operation points back to a versioned source.'],
+  ['02', 'Separate proposing from acting', 'Model output becomes a typed candidate; policy code owns the decision.'],
+  ['03', 'Design recovery as a feature', 'Retries, idempotency, isolation and verification are visible—not hidden.'],
+]
+
 export function Overview({ navigate }: OverviewProps) {
-  const ribbonSignals = ['INTENT → DAG', 'RAG WITH RECEIPTS', '429 RECOVERY', 'HUMAN APPROVAL', 'ZERO-KEY DEMO', 'TRACE EVERYTHING']
-
   return (
-    <motion.div className="page overview" initial={{ opacity: 0, y: 14 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -10 }}>
-      <section className="hero-panel">
-        <div className="hero-copy">
-          <div className="eyebrow"><span className="pulse-dot" /> INTEGRATION INTELLIGENCE IS ONLINE</div>
-          <h1>Make APIs<br /><span>behave.</span></h1>
-          <p>Translate intent into evidence-backed workflows that validate before they act, recover when systems fail, and explain every decision.</p>
-          <div className="hero-actions">
-            <button className="primary-action" onClick={() => navigate('studio')}><Sparkles size={17} /> Compile a workflow <ArrowRight size={16} /></button>
-            <button className="ghost-action" onClick={() => navigate('failure')}><RotateCcw size={16} /> Break the system</button>
+    <motion.div className="page overview loom-overview" initial={{ opacity: 0, y: 14 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -10 }}>
+      <section className="loom-hero">
+        <div className="loom-hero-copy">
+          <span className="section-kicker"><Asterisk size={15} /> THE PRODUCT THESIS / 00</span>
+          <h1>Give<br /><em>chaos</em><br />a shape.</h1>
+          <p>IntegrateX turns a plain-language business request into a grounded, typed and recoverable workflow—then exposes every assumption before anything acts.</p>
+          <div className="loom-hero-actions">
+            <button onClick={() => navigate('studio')}><span>COMPOSE A WORKFLOW<small>Start with natural language</small></span><ArrowDownRight size={22} /></button>
+            <button onClick={() => navigate('failure')}><RotateCcw size={17} /> Rehearse a failure</button>
           </div>
-          <div className="hero-proof">
-            <span><CheckCircle2 size={13} /> Typed plans</span>
-            <span><CheckCircle2 size={13} /> Grounded RAG</span>
-            <span><CheckCircle2 size={13} /> Guarded actions</span>
-          </div>
-          <div className="hero-stamp"><span>SAFE</span><strong>CHAOS<br />MODE</strong><small>NO REAL SIDE EFFECTS</small></div>
+          <div className="hero-margin-note"><Split size={15} /><span><strong>Not a chatbot wrapper.</strong> A product system for inspectable integration decisions.</span></div>
         </div>
 
-        <div className="mesh-visual" aria-label="Animated connector mesh">
-          <div className="mesh-label"><RadioTower size={13} /> LIVE CONNECTOR MESH</div>
-          <motion.div className="orbit orbit-outer" animate={{ rotateZ: 360, rotateX: [63, 68, 63] }} transition={{ rotateZ: { duration: 28, repeat: Infinity, ease: 'linear' }, rotateX: { duration: 6, repeat: Infinity } }} />
-          <motion.div className="orbit orbit-mid" animate={{ rotateZ: -360, rotateY: [0, 12, 0] }} transition={{ rotateZ: { duration: 20, repeat: Infinity, ease: 'linear' }, rotateY: { duration: 7, repeat: Infinity } }} />
-          <motion.div className="orbit orbit-inner" animate={{ rotateZ: 360 }} transition={{ duration: 13, repeat: Infinity, ease: 'linear' }} />
-          <div className="mesh-core"><span>IX</span><i /><b>ORCHESTRATOR</b></div>
-          <motion.span className="mesh-node node-stripe" animate={{ y: [0, -8, 0] }} transition={{ duration: 3.2, repeat: Infinity }}>ST</motion.span>
-          <motion.span className="mesh-node node-hubspot" animate={{ y: [0, 7, 0] }} transition={{ duration: 4.1, repeat: Infinity }}>HS</motion.span>
-          <motion.span className="mesh-node node-slack" animate={{ x: [0, 6, 0] }} transition={{ duration: 3.7, repeat: Infinity }}>SL</motion.span>
-          <motion.span className="mesh-node node-github" animate={{ x: [0, -7, 0] }} transition={{ duration: 4.4, repeat: Infinity }}>GH</motion.span>
-          <div className="packet packet-a" /><div className="packet packet-b" /><div className="packet packet-c" />
-          <div className="mesh-caption"><span><i /> 6 CONNECTORS</span><span><i /> 18 CONTRACTS</span><span><i /> 4 WORKERS</span></div>
-        </div>
-      </section>
-
-      <section className="kinetic-ribbon" aria-label="IntegrateX capabilities">
-        <div className="ribbon-track" aria-hidden="true">
-          {[...ribbonSignals, ...ribbonSignals].map((signal, index) => <span key={`${signal}-${index}`}>{signal}<i>✦</i></span>)}
+        <div className="workflow-loom" aria-label="Intent woven through evidence, validation, approval, execution and verification">
+          <div className="loom-canvas-label"><CircleDot size={13} /> LIVE PRODUCT MODEL <span>DRAG THE KNOTS</span></div>
+          <svg viewBox="0 0 760 650" preserveAspectRatio="none" aria-hidden="true">
+            <motion.path className="loom-path path-main" d="M70 110 C250 30 250 250 420 180 S530 340 690 300 S515 530 670 580" initial={{ pathLength: 0 }} animate={{ pathLength: 1 }} transition={{ duration: 2, ease: [0.16, 1, 0.3, 1] }} />
+            <motion.path className="loom-path path-split" d="M210 146 C300 330 90 345 160 520 S380 420 510 510" initial={{ pathLength: 0 }} animate={{ pathLength: 1 }} transition={{ delay: .28, duration: 2.3, ease: [0.16, 1, 0.3, 1] }} />
+            <motion.path className="loom-path path-proof" d="M420 180 C395 410 640 385 670 580" initial={{ pathLength: 0 }} animate={{ pathLength: 1 }} transition={{ delay: .55, duration: 1.8 }} />
+          </svg>
+          {loomSteps.map((step, index) => {
+            const Icon = step.icon
+            return (
+              <motion.div key={step.label} drag dragConstraints={{ left: -18, right: 18, top: -18, bottom: 18 }} dragElastic={0.12} whileHover={{ scale: 1.05, rotate: 0 }} className={`loom-knot ${step.className}`} initial={{ opacity: 0, scale: .7 }} animate={{ opacity: 1, scale: 1, rotate: index % 2 ? 2 : -2 }} transition={{ delay: .38 + index * .12, type: 'spring' }}>
+                <span><Icon size={16} /></span><strong>{step.label}</strong><small>{step.detail}</small>
+              </motion.div>
+            )
+          })}
+          <motion.div className="loom-pulse" animate={{ offsetDistance: ['0%', '100%'] }} transition={{ duration: 4.5, repeat: Infinity, ease: 'linear' }} />
+          <div className="loom-legend"><span><i /> PROPOSAL</span><span><i /> DETERMINISTIC GATE</span><span><i /> RECEIPT</span></div>
         </div>
       </section>
 
-      <section className="stat-grid">
-        <article><div><Zap size={16} /><span>RUNS / 24H</span></div><strong>1,284</strong><em>+12.6%</em><div className="mini-bars">{[30, 44, 35, 65, 52, 78, 69, 90].map((n, i) => <i key={i} style={{ height: `${n}%` }} />)}</div></article>
-        <article><div><ShieldCheck size={16} /><span>SUCCESS RATE</span></div><strong>97.8%</strong><em>+2.4%</em><div className="ring-stat" style={{ '--progress': '97.8%' } as React.CSSProperties}><span /></div></article>
-        <article><div><RotateCcw size={16} /><span>AUTO-RECOVERED</span></div><strong>43</strong><em>93.4%</em><div className="recovery-lines"><i /><i /><i /></div></article>
-        <article><div><Clock3 size={16} /><span>P95 OVERHEAD</span></div><strong>286<small>ms</small></strong><em className="blue">−18ms</em><svg viewBox="0 0 100 30"><polyline points="0,7 12,10 24,8 37,15 49,13 61,20 74,17 87,25 100,22" /></svg></article>
+      <section className="capability-tape" aria-label="Product capabilities">
+        <motion.div animate={{ x: ['0%', '-50%'] }} transition={{ duration: 30, repeat: Infinity, ease: 'linear' }}>
+          {[0, 1].map((set) => <span key={set}>INTENT → TYPED DAG <i /> VERSIONED EVIDENCE <i /> HUMAN APPROVAL <i /> FAILURE REHEARSAL <i /> VERIFIED OUTCOME <i /></span>)}
+        </motion.div>
       </section>
 
-      <section className="overview-lower">
-        <article className="live-run panel">
-          <header><div><span className="icon-box"><GitBranch size={16} /></span><span><small>ACTIVE EXECUTION</small><strong>Payment → Revenue Signal</strong></span></div><button onClick={() => navigate('studio')}>OPEN TRACE <ArrowRight size={13} /></button></header>
-          <div className="run-meta"><span><CircleDot size={12} /> exec_7A1F9C</span><span>workflow v3</span><span>guarded mode</span><em>RUNNING</em></div>
-          <div className="trace-rail">
+      <section className="loom-story">
+        <div className="principle-ledger">
+          <header><span>DESIGN PRINCIPLES</span><strong>What makes the system trustworthy?</strong></header>
+          {principles.map(([number, title, detail], index) => (
+            <motion.article key={number} initial={{ opacity: 0, x: -20 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ delay: index * .12 }}>
+              <span>{number}</span><div><h3>{title}</h3><p>{detail}</p></div><ArrowRight size={18} />
+            </motion.article>
+          ))}
+        </div>
+
+        <article className="trace-receipt">
+          <header><span>EXECUTION RECEIPT</span><em>SEEDED DEMO TRACE</em></header>
+          <div className="receipt-title"><small>WORKFLOW / V3</small><h3>Payment → Revenue signal</h3><span>trc_91BX</span></div>
+          <div className="receipt-events">
             {traceEvents.map((event, index) => (
-              <motion.div key={event.id} initial={{ opacity: 0, x: -12 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: index * 0.12 }} className={event.status}>
-                <span className="trace-icon">{event.status === 'paused' ? <ShieldCheck size={14} /> : <CheckCircle2 size={14} />}</span>
-                <span><strong>{event.step}</strong><small>{event.connector} · {event.message}</small></span>
+              <motion.div key={event.id} initial={{ opacity: 0, x: 15 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ delay: index * .08 }} className={event.status}>
+                <span>{String(index + 1).padStart(2, '0')}</span>
+                <div><strong>{event.step}</strong><small>{event.connector} · {event.message}</small></div>
                 <em>{event.duration}</em>
+                <i>{event.status === 'paused' ? <ShieldCheck size={12} /> : <Check size={12} />}</i>
               </motion.div>
             ))}
           </div>
+          <footer><span><Fingerprint size={13} /> Audit-ready</span><span><ShieldCheck size={13} /> Guarded</span><button onClick={() => navigate('studio')}>OPEN COMPOSER <ArrowRight size={13} /></button></footer>
         </article>
+      </section>
 
-        <article className="principle panel">
-          <header><span className="icon-box"><Braces size={16} /></span><span><small>CORE PRINCIPLE / 01</small><strong>AI proposes.<br /><b>Code decides.</b></strong></span></header>
-          <p>No model output reaches an external API until it passes typed schema, contract, scope and risk-policy validation.</p>
-          <div className="principle-stack">
-            <span><Sparkles size={13} /> INTENT</span><i /><span><BookOpenCheck size={13} /> EVIDENCE</span><i /><span><ShieldCheck size={13} /> POLICY</span><i /><span><Zap size={13} /> ACTION</span>
-          </div>
-        </article>
+      <section className="outcome-poster">
+        <span>FROM PROMPT</span><i />
+        <strong>PROOF, NOT<br /><em>AI THEATRE.</em></strong>
+        <p>Compile the plan. Inspect the source. Approve the risk. Break the dependency. Verify the recovery.</p>
+        <button onClick={() => navigate('evidence')}>FOLLOW THE RECEIPTS <ArrowRight size={16} /></button>
       </section>
     </motion.div>
   )

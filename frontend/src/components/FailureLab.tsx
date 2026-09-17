@@ -40,7 +40,7 @@ export function FailureLab() {
     <motion.div className="page failure-page" initial={{ opacity: 0, y: 14 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -10 }}>
       <div className="page-heading">
         <div><span className="section-kicker danger"><FlaskConical size={14} /> RESILIENCE SIMULATOR / CONTROLLED</span><h2>Break it on purpose.<br /><em>Watch it recover.</em></h2></div>
-        <div className="lab-score"><span>93.4<small>%</small></span><em>AUTO-RECOVERY<br />LAST 7 DAYS</em></div>
+        <div className="lab-score"><span>93.4<small>%</small></span><em>SEEDED RECOVERY<br />DEMO WINDOW</em></div>
       </div>
 
       <section className="scenario-grid">

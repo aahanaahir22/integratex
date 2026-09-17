@@ -6,11 +6,11 @@ IntegrateX is designed to be reviewed at two levels: a fast interactive product 
 
 | Time | Product surface | What to inspect | Engineering evidence |
 |---:|---|---|---|
-| 0:00 | Intro + Mission Control | Visual system, operational state and system principle | React, Framer Motion, responsive/reduced-motion CSS |
-| 0:45 | Compiler Studio | Intent compilation, typed DAG and validation gates | `backend/app/compiler.py`, `validator.py`, Pydantic models |
-| 1:45 | Evidence Vault | Source version, hash and grounding reason | `backend/app/rag.py`, evidence-linked operations |
-| 2:30 | Guard Rail | Proposed mutation diff and explicit decision | Role-gated approval endpoint and immutable audit event |
-| 3:15 | Failure Lab | 429, timeout, schema drift and duplicate webhook | Bounded retry, outcome verification and idempotency ledger |
+| 0:00 | Intro + The Loom | Spatial product thesis, draggable workflow knots and safe-demo boundary | React, Framer Motion, responsive/reduced-motion CSS |
+| 0:45 | Compose | Intent compilation, typed DAG and validation gates | `backend/app/compiler.py`, `validator.py`, Pydantic models |
+| 1:45 | Receipts | Source version, hash and grounding reason | `backend/app/rag.py`, evidence-linked operations |
+| 2:30 | Decision | Proposed mutation diff and explicit decision | Role-gated approval endpoint and immutable audit event |
+| 3:15 | Chaos | 429, timeout, schema drift and duplicate webhook | Bounded retry, outcome verification and idempotency ledger |
 | 4:15 | Repository | Tests, delivery, threat model and evaluation honesty | GitHub Actions, Docker Compose, documented AWS target |
 
 ## What makes the project distinctive
